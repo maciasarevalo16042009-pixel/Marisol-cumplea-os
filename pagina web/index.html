@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Marisol — Un Universo Hecho de Amor</title>
+    <link rel="stylesheet" href="Styles.css">
+    <!-- Tipografía elegante serif -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Canvas para la Galaxia Espiral, Corazón 3D y Partículas -->
+    <canvas id="galaxyCanvas"></canvas>
+
+    <!-- Interfaz de Usuario (UI) -->
+    <div class="universe-ui">
+        <!-- Título y subtítulo principal -->
+        <header class="header-content">
+            <h1 class="main-title">«Te amo, Marisol ❤️»</h1>
+            <p class="main-subtitle">Un universo no bastaría para describir lo que siento por ti.</p>
+        </header>
+
+        <!-- Mensajes Románticos Flotantes -->
+        <div class="floating-messages-container">
+            <span class="f-msg" style="top: 22%; left: 8%;">Eres mi universo ✨</span>
+            <span class="f-msg" style="top: 28%; right: 10%;">Mi estrella favorita 💫</span>
+            <span class="f-msg" style="top: 72%; left: 12%;">Cada día te elijo 🌌</span>
+            <span class="f-msg" style="top: 68%; right: 9%;">Te amo muchísimo 💖</span>
+            <span class="f-msg" style="top: 42%; left: 5%;">Mi casualidad más bonita 💕</span>
+            <span class="f-msg" style="top: 46%; right: 6%;">Mi lugar favorito eres tú 🪐</span>
+            <span class="f-msg" style="top: 80%; left: 28%;">Late por ti 💓</span>
+            <span class="f-msg" style="top: 15%; right: 26%;">Entre millones de estrellas, te elegiría a ti ✨</span>
+        </div>
+
+        <!-- Botón de Sorpresa -->
+        <div class="action-footer">
+            <button id="surpriseBtn" class="galaxy-btn">
+                ✨ Tengo algo especial para ti
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal / Tarjeta con la Declaración de Cumpleaños -->
+    <div id="surpriseModal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <button id="closeModal" class="close-btn">&times;</button>
+            <div class="modal-scroll-area">
+                <h2>¡Feliz cumpleaños, mi amor! ❤️</h2>
+                
+                <div class="declaration-text">
+                    <p>
+                        Marisol, hoy en el día de tu cumpleaños he querido construir este pequeño universo digital para recordarte lo inmensamente especial que eres para mí. 
+                    </p>
+                    <p>
+                        Cada estrella que brilla en este espacio representa un destello de la alegría que trajiste a mi vida desde el momento en que nuestros caminos se cruzaron. Lo que siento por ti no cabe en palabras ordinarias; es profundo, sincero y crece cada día sin importar la distancia que temporalmente nos separe.
+                    </p>
+                    <p>
+                        Estoy infinitamente agradecido por tu ternura, por tu forma de ver el mundo y por cada instante compartido, ya sea a través de una pantalla o en nuestros pensamientos. Me hace inmensamente feliz saber que estás celebrando un año más de vida, y mi mayor deseo es que este nuevo ciclo te traiga sonrisas, paz y la realización de cada uno de tus sueños.
+                    </p>
+                    <p>
+                        Anhelo con todo mi ser el día en que finalmente podamos encontrarnos en persona, mirarnos frente a frente, fundirnos en un abrazo real y convertir en recuerdos imborrables toda esta ilusión que hoy sostenemos con tanta fe y amor.
+                    </p>
+                    <p>
+                        Que la vida te sonría siempre hoy y en cada paso que des. Te amo con el alma entera.
+                    </p>
+                    
+                    <p class="closing-quote">
+                        «Y si el universo entero decidiera desvanecerse, mi luz siempre buscaría la tuya entre la oscuridad.»
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

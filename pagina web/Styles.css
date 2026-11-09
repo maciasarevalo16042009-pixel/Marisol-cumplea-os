@@ -1,0 +1,255 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #000000;
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+}
+
+/* Canvas ocupando toda la pantalla con soporte táctil optimizado para arrastrar la galaxia */
+#galaxyCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: block;
+    touch-action: none;
+    cursor: grab;
+}
+
+#galaxyCanvas:active {
+    cursor: grabbing;
+}
+
+/* Capa de Interfaz (UI) */
+.universe-ui {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 20px;
+    pointer-events: none;
+}
+
+/* Cabecera / Títulos */
+.header-content {
+    text-align: center;
+    margin-top: 10px;
+    pointer-events: auto;
+    max-width: 700px;
+}
+
+.main-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5.5vw, 4.2rem);
+    font-weight: 600;
+    color: #ffe6f7;
+    text-shadow: 0 0 15px rgba(255, 105, 180, 0.8),
+                 0 0 35px rgba(218, 112, 214, 0.6),
+                 0 0 60px rgba(138, 43, 226, 0.4);
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.main-subtitle {
+    font-size: clamp(0.85rem, 2vw, 1.1rem);
+    font-weight: 300;
+    color: #e2d1f9;
+    text-shadow: 0 0 10px rgba(186, 85, 211, 0.5);
+    letter-spacing: 0.5px;
+}
+
+/* Mensajes Románticos Flotantes */
+.floating-messages-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.f-msg {
+    position: absolute;
+    font-size: clamp(0.75rem, 1.8vw, 0.95rem);
+    color: rgba(255, 220, 245, 0.85);
+    text-shadow: 0 0 8px rgba(255, 105, 180, 0.7);
+    animation: floatGentle 7s infinite ease-in-out;
+    white-space: nowrap;
+}
+
+.f-msg:nth-child(odd) {
+    animation-duration: 9s;
+    animation-direction: reverse;
+}
+
+@keyframes floatGentle {
+    0%, 100% { transform: translateY(0px) scale(1); opacity: 0.65; }
+    50% { transform: translateY(-10px) scale(1.04); opacity: 0.95; text-shadow: 0 0 12px rgba(255, 182, 193, 0.9); }
+}
+
+/* Botón Inferior */
+.action-footer {
+    margin-bottom: 25px;
+    pointer-events: auto;
+}
+
+.galaxy-btn {
+    background: linear-gradient(135deg, rgba(219, 39, 119, 0.6), rgba(126, 34, 206, 0.6));
+    border: 1px solid rgba(255, 182, 193, 0.5);
+    color: #ffffff;
+    padding: 14px 30px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 40px;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 0 25px rgba(236, 72, 153, 0.4), inset 0 0 12px rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: btnPulse 3s infinite ease-in-out;
+}
+
+.galaxy-btn:hover, .galaxy-btn:active {
+    transform: scale(1.06);
+    background: linear-gradient(135deg, rgba(219, 39, 119, 0.85), rgba(126, 34, 206, 0.85));
+    box-shadow: 0 0 35px rgba(236, 72, 153, 0.8), inset 0 0 18px rgba(255, 255, 255, 0.35);
+}
+
+@keyframes btnPulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(236, 72, 153, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.2); }
+    50% { box-shadow: 0 0 30px rgba(236, 72, 153, 0.7), inset 0 0 15px rgba(255, 255, 255, 0.3); }
+}
+
+/* Modal y Declaración de Cumpleaños */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.78);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.modal-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-card {
+    position: relative;
+    background: rgba(18, 5, 28, 0.88);
+    border: 1px solid rgba(255, 105, 180, 0.35);
+    border-radius: 24px;
+    max-width: 620px;
+    width: 100%;
+    max-height: 85vh;
+    padding: 35px 30px;
+    box-shadow: 0 0 50px rgba(219, 39, 119, 0.25), inset 0 0 25px rgba(126, 34, 206, 0.2);
+    transform: translateY(0) scale(1);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-overlay.hidden .modal-card {
+    transform: translateY(30px) scale(0.95);
+}
+
+.modal-scroll-area {
+    overflow-y: auto;
+    padding-right: 5px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 105, 180, 0.4) transparent;
+}
+
+.modal-scroll-area::-webkit-scrollbar {
+    width: 5px;
+}
+
+.modal-scroll-area::-webkit-scrollbar-thumb {
+    background: rgba(255, 105, 180, 0.4);
+    border-radius: 10px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #ffb6c1;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+    z-index: 3;
+}
+
+.close-btn:hover {
+    color: #ffffff;
+}
+
+.modal-card h2 {
+    font-family: 'Cormorant Garamond', serif;
+    color: #ffe6f7;
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+    text-shadow: 0 0 12px rgba(255, 105, 180, 0.7);
+}
+
+.declaration-text p {
+    font-size: clamp(0.92rem, 1.8vw, 1.02rem);
+    line-height: 1.8;
+    color: #f3e8ff;
+    margin-bottom: 16px;
+    text-align: justify;
+    font-weight: 300;
+}
+
+.closing-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.15rem !important;
+    color: #ffb6c1 !important;
+    text-align: center !important;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(255, 182, 193, 0.5);
+}
+
+/* Responsividad Móvil Optimizada (Android) */
+@media (max-width: 600px) {
+    .universe-ui { padding: 18px 12px; }
+    .main-title { font-size: 2.1rem; }
+    .modal-card { padding: 25px 18px; max-height: 88vh; }
+    .declaration-text p { font-size: 0.9rem; line-height: 1.65; }
+    .galaxy-btn { padding: 12px 24px; font-size: 0.92rem; }
+}   
